@@ -10,14 +10,16 @@ export default class GameContainer extends Component {
         super(props);
 
         const players = [CHARACTER.WATERMELON];
-        const enemies = [ENEMY.FRUIT_FLY, ENEMY.FRUIT_FLY];
+        const enemies = [ENEMY.FRUIT_FLY, ENEMY.BLACK_FLY];
         const allCombatants = [...players, ...enemies];
 
         this.state = {
             players,
             enemies,
             turnQueue: this.generateTurnQueue(allCombatants),
-            currentTurnIdx: 0
+            currentTurnIdx: 0,
+            isActionSelected: false,
+            areTargetsSelected: false,
         }
     }
 

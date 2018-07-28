@@ -54,11 +54,29 @@ const FRUIT_FLY = {
     }]
 }
 
+const BLACK_FLY = {
+    name: 'Black Fly',
+    hp: 3,
+    armour: 0,
+    priority: 2,
+    actions: [{
+        type: ATTACK.BASIC,
+        damage: 1,
+        targetType: TARGET.SINGLE
+    }, { // Feast, maybe only available when fruit flesh exposed
+        type: ATTACK.SPECIAL,
+        damage: 1,
+        targetType: TARGET.SINGLE,
+        condition: ({ targetPlayer }) => [STATUS.BRUISED, STATUS.WORN, STATUS.ROTTEN].includes(targetPlayer.status)
+    }]
+}
+
 export default {
     CHARACTER: {
         WATERMELON
     },
     ENEMY: {
-        FRUIT_FLY
+        FRUIT_FLY,
+        BLACK_FLY
     }
 };

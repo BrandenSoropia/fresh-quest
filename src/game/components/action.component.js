@@ -5,9 +5,11 @@ const FlexVertical = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 5%;
+    text-align: left;
 `
 
 const ActionName = styled.div`
+    text-decoration:underline;
 `
 
 const ActionDetail = styled.div`

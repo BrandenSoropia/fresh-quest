@@ -7,6 +7,7 @@ const Flex = styled.div`
     flex-direction: ${props => props.direction}
     
     ${props => props.isCurrentTurn && `background-color: green;`};
+    text-align: left;
 `
 
 const Status = styled.div`
@@ -18,6 +19,7 @@ const Status = styled.div`
 const CombatantState = ({
     name,
     status,
+    isPlayerControlled,
     hp,
     armour,
     priority,
@@ -30,10 +32,10 @@ const CombatantState = ({
                 <span>Name:</span>
                 <span>{name}</span>
             </Status>
-            <Status>
+            {isPlayerControlled && (<Status>
                 <span>Status:</span>
                 <span>{status}</span>
-            </Status>
+            </Status>)}
             <Status>
                 <span>HP:</span>
                 <span>{hp}</span>
