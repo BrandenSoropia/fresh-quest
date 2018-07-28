@@ -1,17 +1,17 @@
 export default {
     ATTACK: {
-        BASIC: 'attack-basic',
-        SPECIAL: 'attack-special',
+        BASIC: 'Basic Attack',
+        SPECIAL: 'Special Attack',
     },
     TARGET: {
-        SINGLE: 'target-single',
-        ALL: 'target-all'
+        SINGLE: 'Single',
+        ALL: 'All'
     },
     STATUS: {
-        FRESH: 'status-fresh', // 100%-76% HP
-        BRUISED: 'status-bruised', // 75%-51% HP
-        WORN: 'status-worn', // 50%-26% HP
-        ROTTEN: 'status-rotten', // 25%-1% HP
-        GARBAGE: 'status-garbage' // 0% HP
+        FRESH: 'Fresh', // 100%-76% HP
+        BRUISED: 'Bruised', // 75%-51% HP
+        WORN: 'Worn', // 50%-26% HP
+        ROTTEN: 'Rotten', // 25%-1% HP
+        GARBAGE: 'Garbage' // 0% HP
     }
 };
