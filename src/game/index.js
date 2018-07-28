@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import players from './players';
 import CombatantState from './components/combatant-state.component';
-// import Action from './components/action.component';
 
 const { CHARACTER, ENEMY } = players;
 
@@ -17,10 +16,25 @@ export default class GameContainer extends Component {
             players,
             enemies,
             turnQueue: this.generateTurnQueue(allCombatants),
-            currentTurnIdx: 0,
-            isActionSelected: false,
-            areTargetsSelected: false,
+            currentTurnIdx: 2,
+            selectedAction: {},
+            selectedTarget: [],
+            isSelectingTarget: false
         }
+    }
+
+    selectAction = selectedAction => {
+        this.setState(prevState => ({
+            ...prevState,
+            selectedAction
+        }))
+    }
+
+    selectTarget = selectedTarget => {
+        this.setState(prevState => ({
+            ...prevState,
+            selectedTarget
+        }))
     }
 
     generateTurnQueue = (allCombatants) => {        
@@ -48,20 +62,25 @@ export default class GameContainer extends Component {
     }
 
     render() {
-        const { turnQueue, currentTurnIdx, player } = this.state;
+        const { turnQueue, currentTurnIdx, isSelectingTarget } = this.state;
         // const currentTurnParticipant = turnQueue[currentTurnIdx];
 
         return (
             <div className="GameContainer">
                 <div className="battle-container">
-                    {/* TODO: Display all participants' states in text for now */}
-                    {turnQueue.map((combatant, idx) => <CombatantState {...combatant} isCurrentTurn={currentTurnIdx === idx} />)}
+                    {turnQueue.map((combatant, idx) => {
+                        const isCurrentTurn = currentTurnIdx === idx;
+
+                        return <CombatantState
+                            key={`combatant-state-${idx}`}
+                            {...combatant}
+                            isCurrentTurn={isCurrentTurn}
+                            onActionClick={this.selectAction}
+                            isSelectable={isSelectingTarget}
+                            onTargetSelection={this.selectTarget}
+                        />
+                    })}
                 </div>
-                {/* <div className="actions-container">
-                    {currentTurnParticipant.isPlayerControlled && (
-                        currentTurnParticipant.actions.map((action, idx) => <Action {...action} key={`action-${idx}`}/>)
-                    )}
-                </div> */}
             </div>
         )
     }

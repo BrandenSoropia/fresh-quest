@@ -5,9 +5,12 @@ import Action from './action.component';
 const Flex = styled.div`
     display: flex;
     flex-direction: ${props => props.direction}
-    
-    ${props => props.isCurrentTurn && `background-color: green;`};
     text-align: left;
+    
+    ${props => props.isCurrentTurn && `
+        background-color: grey;
+        border-left: 10px solid green;
+    `};
 `
 
 const Status = styled.div`
@@ -24,9 +27,20 @@ const CombatantState = ({
     armour,
     priority,
     actions,
-    isCurrentTurn
+    isCurrentTurn,
+    onActionClick,
+    onTargetSelection,
+    isSelectable
 }) => (
-    <Flex className="CombatantState" direction="row" isCurrentTurn={isCurrentTurn}>
+    <Flex
+        className="CombatantState"
+        direction="row"
+        isCurrentTurn={isCurrentTurn}
+        onClick={isSelectable
+            ? () => { onTargetSelection(this.props) }
+            : undefined
+        }
+    >
         <Flex direction="column" className="status-container">
             <Status>
                 <span>Name:</span>
@@ -50,7 +64,14 @@ const CombatantState = ({
             </Status>
         </Flex>
         <div>
-            {actions.map(action => <Action {...action} />)}
+            {actions.map((action, idx) =>
+                <Action
+                    key={`${name}-action-${idx}`}
+                    {...action}
+                    isActive={isCurrentTurn && isPlayerControlled}
+                    onActionClick={onActionClick}
+                />
+            )}
         </div>
     </Flex>
 )
